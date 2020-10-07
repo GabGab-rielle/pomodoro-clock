@@ -15,7 +15,7 @@ function App() {
   // set default as 25mins
   const [sessionLength, setSessionLength] = useState(60 * 25);
   // create and initialise flag variable to track whether it's a session or break
-  const [currentSessionType, SetCurrentSessionType] = useState("Session");
+  const [currentSessionType, setCurrentSessionType] = useState("Session");
   // intervalId set to null as timer not started
   const [intervalId, setIntervalId] = useState(null);
   // initialise time left state to be session length
@@ -28,7 +28,7 @@ function App() {
     // array is dependency list with all vairables we're listening on
   }, [sessionLength]);
 
-  // BREAK //
+  // ------------------------ BREAK ------------------------ //
   // function which decrements the breakLength by 1 min
   const decrementBreakLengthByOneMinute = () => {
     const newBreakLength = breakLength - 60;
@@ -48,7 +48,7 @@ function App() {
     setBreakLength(breakLength + 60);
   };
 
-  // SESSION //
+  // ------------------------ SESSION ------------------------ //
   // function which decrements the sessionLength by 1 min
   const decrementSessionLengthByOneMinute = () => {
     const newSessionLength = sessionLength - 60;
@@ -68,16 +68,7 @@ function App() {
     setSessionLength(sessionLength + 60);
   };
 
-  // RESET //
-  const handleResetButtonClick = () => {
-    // stop timer by clearing the timeout interval
-    // set intervalId to null to show no timer is running
-    // set sessionType to 'Session'
-    // reset the sessionLength to 25 mins
-    // reset breakLength to 5 mins
-    // reset timer to 25 mins (initial session length)
-  };
-
+  // ------------------------ TIMER ------------------------ //
   // if the clock is running intervalId should not be null
   const isTimeStarted = intervalId != null;
   // function which deals with the start and stop buttons
@@ -104,12 +95,12 @@ function App() {
           }
           // if it's a session, switch to break and setTimeLeft to breakLength
           if (currentSessionType == "Session") {
-            SetCurrentSessionType("Break");
+            setCurrentSessionType("Break");
             setTimeLeft(breakLength);
 
             // if break, switch to session, switch to session and setTimeLeft to sessionLength
           } else if (currentSessionType == "Break") {
-            SetCurrentSessionType("Session");
+            setCurrentSessionType("Session");
             setTimeLeft(sessionLength);
           }
         });
@@ -118,6 +109,22 @@ function App() {
       // new interval get set as the id
       setIntervalId(newIntervalId);
     }
+  };
+
+  // ------------------------ RESET ------------------------ //
+  const handleResetButtonClick = () => {
+    // stop timer by clearing the timeout interval
+    clearInterval(intervalId);
+    // set intervalId to null to show no timer is running
+    setIntervalId(null);
+    // set sessionType to 'Session'
+    setCurrentSessionType("Session");
+    // reset the sessionLength to 25 mins
+    setSessionLength(60 * 25);
+    // reset breakLength to 5 mins
+    setBreakLength(60 * 5);
+    // reset timer to 25 mins (initial session length)
+    setTimeLeft(60 * 25);
   };
 
   return (
@@ -140,11 +147,9 @@ function App() {
         decrementSessionLengthByOneMinute={decrementSessionLengthByOneMinute}
         incrementSessionLengthByOneMinute={incrementSessionLengthByOneMinute}
       />
-      {/*
-      <innerText id="timer-label">Session</innerText>
-      <p id="time-left"></p>
-      <button id="start_stop">Start</button>
-      <button id="reset">Reset</button> */}
+      <button id="reset" onClick={handleResetButtonClick}>
+        Reset
+      </button>
     </div>
   );
 }

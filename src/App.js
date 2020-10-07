@@ -1,19 +1,21 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "./App.css";
 import Break from "./components/Break.jsx";
 import Session from "./components/Session";
 import TimeLeft from "./components/TimeLeft";
 
 function App() {
+  // reference to audio
+  const audioElement = useRef(null);
   // create and initialise a breakLength/sessionLength state that users can modify
   // later when buttons are added. This returns a tuple where the
   // first value is breakLength/sessionLength and second is setBreakLength/
   // setSessionLength variable
-
   // set default as 5mins (300(sec) = 5(min) x 60(secs))
   const [breakLength, setBreakLength] = useState(300);
   // set default as 25mins
   const [sessionLength, setSessionLength] = useState(60 * 25);
+
   // create and initialise flag variable to track whether it's a session or break
   const [currentSessionType, setCurrentSessionType] = useState("Session");
   // intervalId set to null as timer not started
@@ -93,6 +95,7 @@ function App() {
           if (newTimeLeft >= 0) {
             return prevTimeLeft - 1;
           }
+          audioElement.current.play();
           // if it's a session, switch to break and setTimeLeft to breakLength
           if (currentSessionType == "Session") {
             setCurrentSessionType("Break");
@@ -113,6 +116,8 @@ function App() {
 
   // ------------------------ RESET ------------------------ //
   const handleResetButtonClick = () => {
+    // reset audio
+    audioElement.current.load();
     // stop timer by clearing the timeout interval
     clearInterval(intervalId);
     // set intervalId to null to show no timer is running
@@ -150,6 +155,12 @@ function App() {
       <button id="reset" onClick={handleResetButtonClick}>
         Reset
       </button>
+      <audio id="beep" ref={audioElement}>
+        <source
+          src="https://onlineclock.net/audio/options/default.mp3"
+          type="audio/mpeg"
+        />
+      </audio>
     </div>
   );
 }

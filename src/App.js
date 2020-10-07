@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./App.css";
 import Break from "./components/Break.jsx";
 import Session from "./components/Session";
+import TimeLeft from "./components/TimeLeft";
 
 function App() {
   // BREAK //
@@ -61,6 +62,7 @@ function App() {
         decrementBreakLengthByOneMinute={decrementBreakLengthByOneMinute}
         incrementBreakLengthByOneMinute={incrementBreakLengthByOneMinute}
       />
+      <TimeLeft sessionLength={sessionLength} />
       {/* construct variables to pass in Session.jsx component */}
       <Session
         sessionLength={sessionLength}

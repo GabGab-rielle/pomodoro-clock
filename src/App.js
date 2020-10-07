@@ -1,17 +1,34 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css";
 import Break from "./components/Break.jsx";
 import Session from "./components/Session";
 import TimeLeft from "./components/TimeLeft";
 
 function App() {
-  // BREAK //
-  // create and initialise a breakLength state that users can modify
+  // create and initialise a breakLength/sessionLength state that users can modify
   // later when buttons are added. This returns a tuple where the
-  // first value is breakLength and second is setBreakLength variable
-  // set default as 5mins (300(sec) = 5(min) x 60(sec))
-  const [breakLength, setBreakLength] = useState(300);
+  // first value is breakLength/sessionLength and second is setBreakLength/
+  // setSessionLength variable
 
+  // set default as 5mins (300(sec) = 5(min) x 60(secs))
+  const [breakLength, setBreakLength] = useState(300);
+  // set default as 25mins
+  const [sessionLength, setSessionLength] = useState(60 * 25);
+  // create and initialise flag variable to track whether it's a session or break
+  const [currentSessionType, SetCurrentSessionType] = useState("Session");
+  // intervalId set to null as timer not started
+  const [intervalId, setIntervalId] = useState(null);
+  // initialise time left state to be session length
+  const [timeLeft, setTimeLeft] = useState(sessionLength);
+
+  // function which takes in a callback that is called whenever a variable that you are
+  // listening on changes. In this instance, change timeLeft whenever sessionLength changes
+  useEffect(() => {
+    setTimeLeft(sessionLength);
+    // array is dependency list with all vairables we're listening on
+  }, [sessionLength]);
+
+  // BREAK //
   // function which decrements the breakLength by 1 min
   const decrementBreakLengthByOneMinute = () => {
     const newBreakLength = breakLength - 60;
@@ -32,9 +49,6 @@ function App() {
   };
 
   // SESSION //
-  // set default as 25mins
-  const [sessionLength, setSessionLength] = useState(60 * 25);
-
   // function which decrements the sessionLength by 1 min
   const decrementSessionLengthByOneMinute = () => {
     const newSessionLength = sessionLength - 60;
@@ -54,6 +68,58 @@ function App() {
     setSessionLength(sessionLength + 60);
   };
 
+  // RESET //
+  const handleResetButtonClick = () => {
+    // stop timer by clearing the timeout interval
+    // set intervalId to null to show no timer is running
+    // set sessionType to 'Session'
+    // reset the sessionLength to 25 mins
+    // reset breakLength to 5 mins
+    // reset timer to 25 mins (initial session length)
+  };
+
+  // if the clock is running intervalId should not be null
+  const isTimeStarted = intervalId != null;
+  // function which deals with the start and stop buttons
+  const handleStartStopClick = () => {
+    // if timer is running, allow timer to be stopped by clearing the intervalId which
+    // stops the function from calling and set interval to null
+    if (isTimeStarted) {
+      clearInterval(intervalId);
+      setIntervalId(null);
+
+      // else in stop mode, allow the timer to be started and do usual funtion
+    } else {
+      // setInterval function takes funtion (prevTimeLeft) as 1st param and number in ms
+      // (1000) as 2nd param. Number in ms determines how often function in 1st param is
+      // called
+      const newIntervalId = setInterval(() => {
+        // initialise setTimeLeft variable
+        setTimeLeft((prevTimeLeft) => {
+          // decrement the time by 1
+          const newTimeLeft = prevTimeLeft - 1;
+          // only want time to be deducted when time is greater than equal to 0
+          if (newTimeLeft >= 0) {
+            return prevTimeLeft - 1;
+          }
+          // if it's a session, switch to break and setTimeLeft to breakLength
+          if (currentSessionType == "Session") {
+            SetCurrentSessionType("Break");
+            setTimeLeft(breakLength);
+
+            // if break, switch to session, switch to session and setTimeLeft to sessionLength
+          } else if (currentSessionType == "Break") {
+            SetCurrentSessionType("Session");
+            setTimeLeft(sessionLength);
+          }
+        });
+        // decrement timeLeft by 1 every second (1000ms)
+      }, 1000);
+      // new interval get set as the id
+      setIntervalId(newIntervalId);
+    }
+  };
+
   return (
     <div className="App">
       {/* construct variables to pass in Break.jsx component */}
@@ -62,7 +128,12 @@ function App() {
         decrementBreakLengthByOneMinute={decrementBreakLengthByOneMinute}
         incrementBreakLengthByOneMinute={incrementBreakLengthByOneMinute}
       />
-      <TimeLeft sessionLength={sessionLength} breakLength={breakLength} />
+      <TimeLeft
+        timerLabel={currentSessionType}
+        handleStartStopClick={handleStartStopClick}
+        startStopButtonLabel={isTimeStarted ? "Stop" : "Start"}
+        timeLeft={timeLeft}
+      />
       {/* construct variables to pass in Session.jsx component */}
       <Session
         sessionLength={sessionLength}

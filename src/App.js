@@ -30,6 +30,24 @@ function App() {
     // array is dependency list with all vairables we're listening on
   }, [sessionLength]);
 
+  // listen to timeLeft changes
+  useEffect(() => {
+    // if it is 0
+    if (timeLeft === 0) {
+      // play the audio
+      audioElement.current.play();
+      // if it's a session, switch to break and setTimeLeft to breakLength
+      if (currentSessionType === "Session") {
+        setCurrentSessionType("Break");
+        setTimeLeft(breakLength);
+        // if break, switch to session, switch to session and setTimeLeft to sessionLength
+      } else if (currentSessionType === "Break") {
+        setCurrentSessionType("Session");
+        setTimeLeft(sessionLength);
+      }
+    }
+  }, [breakLength, currentSessionType, sessionLength, timeLeft]);
+
   // ------------------------ BREAK ------------------------ //
   // function which decrements the breakLength by 1 min
   const decrementBreakLengthByOneMinute = () => {
@@ -86,25 +104,7 @@ function App() {
       // called
       const newIntervalId = setInterval(() => {
         // initialise setTimeLeft variable
-        setTimeLeft((prevTimeLeft) => {
-          // decrement the time by 1
-          const newTimeLeft = prevTimeLeft - 1;
-          // only want time to be deducted when time is greater than equal to 0
-          if (newTimeLeft >= 0) {
-            return newTimeLeft;
-          }
-          audioElement.current.play();
-          // if it's a session, switch to break and setTimeLeft to breakLength
-          if (currentSessionType == "Session") {
-            setCurrentSessionType("Break");
-            return breakLength;
-
-            // if break, switch to session, switch to session and setTimeLeft to sessionLength
-          } else if (currentSessionType == "Break") {
-            setCurrentSessionType("Session");
-            return sessionLength;
-          }
-        });
+        setTimeLeft((prevTimeLeft) => prevTimeLeft - 1);
         // decrement timeLeft by 1 every second (1000ms)
       }, 1000);
       // new interval get set as the id

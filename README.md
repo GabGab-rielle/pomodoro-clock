@@ -1,3 +1,7 @@
+I coded and designed the Pomodoro (25+5) Clock challenge as part of the Front End Libraries Certification on [FreeCodeCamp](https://freecodecamp.org) 
+
+The finished project can be found [here](https://hardcore-kare-5c411d.netlify.app/) 
+
 ![Screenshot Image From My Pomodoro Clock React App](/images/Pomodoro-Screenshot.png)
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

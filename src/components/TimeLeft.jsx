@@ -21,7 +21,9 @@ const TimeLeft = ({
       <p id="timer-label">{timerLabel}</p>
       <p id="time-left">{formattedTimeLeft}</p>
       {/* if in start mode, show Stop in button, otherwise in stop mode so show Start */}
-      <button onClick={handleStartStopClick}>{startStopButtonLabel}</button>
+      <button id="start_stop" onClick={handleStartStopClick}>
+        {startStopButtonLabel}
+      </button>
     </div>
   );
 };

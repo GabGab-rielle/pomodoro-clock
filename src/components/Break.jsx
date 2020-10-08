@@ -13,7 +13,7 @@ const Break = (props) => {
   // duration function from the js library 'moment' which converts a given time and
   // it's unit to the unit format you want. Hence, breakLength variable is in seconds
   // we want to convert that to minutes and initialise it to another variable
-  const breakLengthInMinutes = moment.duration(breakLength, "s").minutes();
+  const breakLengthInMinutes = moment.duration(breakLength, "s").asMinutes();
 
   return (
     <div>

@@ -13,7 +13,9 @@ const Session = (props) => {
   // duration function from the js library 'moment' which converts a given time and
   // it's unit to the unit format you want. Hence, sessionLength variable is in seconds
   // we want to convert that to minutes and initialise it to another variable
-  const sessionLengthInMinutes = moment.duration(sessionLength, "s").minutes();
+  const sessionLengthInMinutes = moment
+    .duration(sessionLength, "s")
+    .asMinutes();
 
   return (
     <div>

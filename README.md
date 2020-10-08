@@ -1,10 +1,12 @@
 # Pomodoro Clock 
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/204c1614-7cb7-4b14-b721-9c04cc6699cc/deploy-status)](https://app.netlify.com/sites/gab-pomodoro-clock/deploys)
+
 I coded along with Aryan Jabbari (you can check out his GitHub [here](https://github.com/AryanJ-NYC)) on the Pomodoro (25+5) Clock challenge as part of the Front End Libraries Certification on [FreeCodeCamp](https://freecodecamp.org) 
 
 His YouTube videos that I followed can be found [here](https://www.youtube.com/playlist?list=PL3cz80ehFCalRswkbzwTJ-zdZxu3iBjkJ)
 
-Check out my finished project [here](https://hardcore-kare-5c411d.netlify.app/) 
+Check out my finished project [here](gab-pomodoro-clock.netlify.app) 
 
 ![Screenshot Image From My Pomodoro Clock React App](/images/Pomodoro-Screenshot.png)
 

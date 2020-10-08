@@ -2,9 +2,9 @@
 
 I coded along with Aryan Jabbari (you can check out his GitHub [here](https://github.com/AryanJ-NYC)) on the Pomodoro (25+5) Clock challenge as part of the Front End Libraries Certification on [FreeCodeCamp](https://freecodecamp.org) 
 
-His YouTube videos can be found [here](https://www.youtube.com/playlist?list=PL3cz80ehFCalRswkbzwTJ-zdZxu3iBjkJ)
+His YouTube videos that I followed can be found [here](https://www.youtube.com/playlist?list=PL3cz80ehFCalRswkbzwTJ-zdZxu3iBjkJ)
 
-The finished project can be found [here](https://hardcore-kare-5c411d.netlify.app/) 
+Check out my finished project [here](https://hardcore-kare-5c411d.netlify.app/) 
 
 ![Screenshot Image From My Pomodoro Clock React App](/images/Pomodoro-Screenshot.png)
 

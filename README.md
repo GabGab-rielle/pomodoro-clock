@@ -1,3 +1,5 @@
+# Pomodoro Clock 
+
 I coded and designed the Pomodoro (25+5) Clock challenge as part of the Front End Libraries Certification on [FreeCodeCamp](https://freecodecamp.org) 
 
 The finished project can be found [here](https://hardcore-kare-5c411d.netlify.app/) 

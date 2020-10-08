@@ -3,9 +3,13 @@ import momentDurationFormatSetup from "moment-duration-format";
 import React from "react";
 
 // to setup , call setup function and pass moment package
+// ignore error for now as it's super complicated to fix
+// @ts-ignore
 momentDurationFormatSetup(moment);
 
-const TimeLeft = ({
+// React.FC tells typescript that Session is a react funtional component
+// then Props from bottom of page is parsed
+const TimeLeft: React.FC<Props> = ({
   timerLabel,
   handleStartStopClick,
   startStopButtonLabel,
@@ -47,6 +51,18 @@ const TimeLeft = ({
       </div>
     </div>
   );
+};
+
+// This describes the shape of the props that are expected to go into the
+// Session function
+type Props = {
+  timerLabel: string;
+  // functions which take no parameters and have no return value
+  handleStartStopClick: () => void;
+  startStopButtonLabel: string;
+  timeLeft: number;
+  // functions which take no parameters and have no return value
+  handleResetButtonClick: () => void;
 };
 
 export default TimeLeft;

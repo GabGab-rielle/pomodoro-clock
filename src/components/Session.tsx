@@ -8,15 +8,14 @@ import {
   PlusMinusTimeContainer,
 } from "../ui/BreakSessionUi";
 
-// Session label component
-const Session = (props) => {
+// React.FC tells typescript that Session is a react funtional component
+// then Props from bottom of page is parsed
+const Session: React.FC<Props> = ({
   // destructure the props passed in App.js
-  const {
-    sessionLength,
-    decrementSessionLengthByOneMinute,
-    incrementSessionLengthByOneMinute,
-  } = props;
-
+  sessionLength,
+  decrementSessionLengthByOneMinute,
+  incrementSessionLengthByOneMinute,
+}) => {
   // duration function from the js library 'moment' which converts a given time and
   // it's unit to the unit format you want. Hence, sessionLength variable is in seconds
   // we want to convert that to minutes and initialise it to another variable
@@ -49,6 +48,15 @@ const Session = (props) => {
       </PlusMinusTimeContainer>
     </BreakSessionContainer>
   );
+};
+
+// This describes the shape of the props that are expected to go into the
+// Session function
+type Props = {
+  sessionLength: number;
+  // functions which take no parameters and have no return value
+  decrementSessionLengthByOneMinute: () => void;
+  incrementSessionLengthByOneMinute: () => void;
 };
 
 export default Session;

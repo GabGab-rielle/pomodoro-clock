@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./assets/main.css";
-import Break from "./components/Break.jsx";
+import Break from "./components/Break";
 import Session from "./components/Session";
 import TimeLeft from "./components/TimeLeft";
 
 function App() {
   // react reference to audio
-  const audioElement = useRef(null);
+  const audioElement = useRef<HTMLAudioElement>(null);
   // create and initialise a breakLength/sessionLength state that users can modify
   // later when buttons are added. This returns a tuple where the
   // first value is breakLength/sessionLength and second is setBreakLength/
@@ -18,8 +18,8 @@ function App() {
 
   // create and initialise flag variable to track whether it's a session or break
   const [currentSessionType, setCurrentSessionType] = useState("Session");
-  // intervalId set to null as timer not started
-  const [intervalId, setIntervalId] = useState(null);
+  // intervalId set to null as timer not started.
+  const [intervalId, setIntervalId] = useState<NodeJS.Timeout | null>(null);
   // initialise time left state to be session length
   const [timeLeft, setTimeLeft] = useState(sessionLength);
 
@@ -34,8 +34,9 @@ function App() {
   useEffect(() => {
     // if it is 0
     if (timeLeft === 0) {
-      // play the audio
-      audioElement.current.play();
+      // play the audio, use of optional chaining (?) to say that if it's null,
+      // don't run it, otherwise continue to run the code below it
+      audioElement?.current?.play();
       // if it's a session, switch to break and setTimeLeft to breakLength
       if (currentSessionType === "Session") {
         setCurrentSessionType("Break");
@@ -94,7 +95,10 @@ function App() {
     // if timer is running, allow timer to be stopped by clearing the intervalId which
     // stops the function from calling and set interval to null
     if (isTimeStarted) {
-      clearInterval(intervalId);
+      // if intervalId exists
+      if (intervalId) {
+        clearInterval(intervalId);
+      }
       setIntervalId(null);
 
       // else in stop mode, allow the timer to be started and do usual funtion
@@ -115,9 +119,12 @@ function App() {
   // ------------------------ RESET ------------------------ //
   const handleResetButtonClick = () => {
     // reset audio
-    audioElement.current.load();
-    // stop timer by clearing the timeout interval
-    clearInterval(intervalId);
+    audioElement?.current?.load();
+    // if intervalId exists
+    if (intervalId) {
+      // stop timer by clearing the timeout interval
+      clearInterval(intervalId);
+    }
     // set intervalId to null to show no timer is running
     setIntervalId(null);
     // set sessionType to 'Session'

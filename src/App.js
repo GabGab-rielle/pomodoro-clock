@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import "./App.css";
+import "./assets/main.css";
 import Break from "./components/Break.jsx";
 import Session from "./components/Session";
 import TimeLeft from "./components/TimeLeft";
@@ -131,34 +131,42 @@ function App() {
   };
 
   return (
-    <div className="App">
-      {/* construct variables to pass in Break.jsx component */}
-      <Break
-        breakLength={breakLength}
-        decrementBreakLengthByOneMinute={decrementBreakLengthByOneMinute}
-        incrementBreakLengthByOneMinute={incrementBreakLengthByOneMinute}
-      />
-      <TimeLeft
-        timerLabel={currentSessionType}
-        handleStartStopClick={handleStartStopClick}
-        startStopButtonLabel={isTimeStarted ? "Stop" : "Start"}
-        timeLeft={timeLeft}
-      />
-      {/* construct variables to pass in Session.jsx component */}
-      <Session
-        sessionLength={sessionLength}
-        decrementSessionLengthByOneMinute={decrementSessionLengthByOneMinute}
-        incrementSessionLengthByOneMinute={incrementSessionLengthByOneMinute}
-      />
-      <button id="reset" onClick={handleResetButtonClick}>
-        Reset
-      </button>
+    <div className="flex flex-col h-screen items-center bg-indigo-900">
+      <h1 className="text-gray-300 font-bold font-clock text-4xl mt-10 mb-20 mr-5">
+        Pomodoro Clock
+      </h1>
+      <div className="flex w-full justify-around">
+        {/* construct props to pass in Break.jsx component */}
+        <Break
+          breakLength={breakLength}
+          decrementBreakLengthByOneMinute={decrementBreakLengthByOneMinute}
+          incrementBreakLengthByOneMinute={incrementBreakLengthByOneMinute}
+        />
+        {/* construct props to pass in TimeLeft.jsx component */}
+        <TimeLeft
+          handleResetButtonClick={handleResetButtonClick}
+          timerLabel={currentSessionType}
+          handleStartStopClick={handleStartStopClick}
+          startStopButtonLabel={isTimeStarted ? "Stop" : "Start"}
+          timeLeft={timeLeft}
+        />
+        {/* construct props to pass in Session.jsx component */}
+        <Session
+          sessionLength={sessionLength}
+          decrementSessionLengthByOneMinute={decrementSessionLengthByOneMinute}
+          incrementSessionLengthByOneMinute={incrementSessionLengthByOneMinute}
+        />
+      </div>
       <audio id="beep" ref={audioElement}>
         <source
           src="https://onlineclock.net/audio/options/default.mp3"
           type="audio/mpeg"
         />
       </audio>
+      <footer className="mt-10 mr-5 text-gray-300 text-xs">
+        Made with &#10084; by&nbsp;
+        <a href="https://github.com/GabGab-rielle">Gabrielle</a>.
+      </footer>
     </div>
   );
 }

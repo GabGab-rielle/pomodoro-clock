@@ -1,5 +1,12 @@
 import moment from "moment";
 import React from "react";
+import {
+  BreakSessionContainer,
+  BreakSessionLabel,
+  BreakSessionTime,
+  PlusMinusButton,
+  PlusMinusTimeContainer,
+} from "../ui/BreakSessionUi";
 
 // Break label component
 const Break = (props) => {
@@ -16,18 +23,29 @@ const Break = (props) => {
   const breakLengthInMinutes = moment.duration(breakLength, "s").asMinutes();
 
   return (
-    <div>
-      <p id="break-label">Break</p>
-      <p id="break-length">{breakLengthInMinutes}</p>
-      {/* decrease time by 60sec */}
-      <button id="break-decrement" onClick={decrementBreakLengthByOneMinute}>
-        -
-      </button>
-      {/* increase time by 60sec */}
-      <button id="break-increment" onClick={incrementBreakLengthByOneMinute}>
-        +
-      </button>
-    </div>
+    <BreakSessionContainer>
+      <BreakSessionLabel id="break-label">Break Length</BreakSessionLabel>
+      <PlusMinusTimeContainer>
+        {/* decrease time by 60sec */}
+        <PlusMinusButton
+          id="break-decrement"
+          onClick={decrementBreakLengthByOneMinute}
+        >
+          -
+        </PlusMinusButton>
+        {/* Break length */}
+        <BreakSessionTime id="break-length">
+          {breakLengthInMinutes}
+        </BreakSessionTime>
+        {/* increase time by 60sec */}
+        <PlusMinusButton
+          id="break-increment"
+          onClick={incrementBreakLengthByOneMinute}
+        >
+          +
+        </PlusMinusButton>
+      </PlusMinusTimeContainer>
+    </BreakSessionContainer>
   );
 };
 

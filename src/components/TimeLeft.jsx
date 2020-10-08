@@ -10,6 +10,7 @@ const TimeLeft = ({
   handleStartStopClick,
   startStopButtonLabel,
   timeLeft,
+  handleResetButtonClick,
 }) => {
   // set format to MM:SS
   const formattedTimeLeft = moment
@@ -17,13 +18,33 @@ const TimeLeft = ({
     .format("mm:ss", { trim: false });
 
   return (
-    <div>
-      <p id="timer-label">{timerLabel}</p>
-      <p id="time-left">{formattedTimeLeft}</p>
-      {/* if in start mode, show Stop in button, otherwise in stop mode so show Start */}
-      <button id="start_stop" onClick={handleStartStopClick}>
-        {startStopButtonLabel}
-      </button>
+    <div className="flex flex-col justify-evenly items-center w-64 h-64 bg-indigo-300 rounded-full border-2 border-gray-300 border-solid mt-20">
+      <p
+        className="mt-5 text-gray-900 font-semibold text-2xl font-mono"
+        id="timer-label"
+      >
+        {timerLabel}
+      </p>
+      <p className="font-clock text-gray-900 text-4xl font-bold" id="time-left">
+        {formattedTimeLeft}
+      </p>
+      <div className="grid grid-flow-col gap-2">
+        {/* if in start mode, show Stop in button, otherwise in stop mode so show Start */}
+        <button
+          className="text-gray-800 font-medium bg-yellow-400 px-4 py-2 rounded-lg mb-5 hover:bg-orange-500"
+          id="start_stop"
+          onClick={handleStartStopClick}
+        >
+          {startStopButtonLabel}
+        </button>
+        <button
+          className="border-2 text-gray-800 font-medium rounded-lg border-yellow-400 border-solid px-3 py-2 mb-5 ml-5 hover:border-orange-500"
+          id="reset"
+          onClick={handleResetButtonClick}
+        >
+          Reset
+        </button>
+      </div>
     </div>
   );
 };

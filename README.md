@@ -1,6 +1,6 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+![Screenshot image from my pomodoro clock react app] (https://images/Pomodoro-Screenshot.png)
 
-![Screenshot image from my pomodoro clock react app] (/images/Pomodoro-Screenshot.png)
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
 

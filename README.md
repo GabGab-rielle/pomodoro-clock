@@ -6,7 +6,7 @@ I coded along with Aryan Jabbari (you can check out his GitHub [here](https://gi
 
 His YouTube videos that I followed can be found [here](https://www.youtube.com/playlist?list=PL3cz80ehFCalRswkbzwTJ-zdZxu3iBjkJ)
 
-Check out my finished project [here](gab-pomodoro-clock.netlify.app) 
+Check out my finished project [here](https://gab-pomodoro-clock.netlify.app) 
 
 ![Screenshot Image From My Pomodoro Clock React App](/images/Pomodoro-Screenshot.png)
 

@@ -1,3 +1,5 @@
+![Screenshot Image From My Pomodoro Clock React App](/images/Pomodoro-Screenshot.png)
+
 # Pomodoro Clock 
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/204c1614-7cb7-4b14-b721-9c04cc6699cc/deploy-status)](https://app.netlify.com/sites/gab-pomodoro-clock/deploys)
@@ -7,8 +9,6 @@ I coded along with Aryan Jabbari (you can check out his GitHub [here](https://gi
 His YouTube videos that I followed can be found [here](https://www.youtube.com/playlist?list=PL3cz80ehFCalRswkbzwTJ-zdZxu3iBjkJ)
 
 Check out my finished project [here](https://gab-pomodoro-clock.netlify.app) 
-
-![Screenshot Image From My Pomodoro Clock React App](/images/Pomodoro-Screenshot.png)
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
